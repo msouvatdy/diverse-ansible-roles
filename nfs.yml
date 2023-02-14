@@ -1,0 +1,34 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: install nfs-server
+      apt:
+        name: nfs-kernel-server
+        state: present
+        update_cache: yes
+
+    - name: Create export dir
+      file:
+        path: /data/k8s_int
+        state: directory
+        mode: '0777'
+
+    - name: configure nfs export
+      lineinfile:
+        create: yes
+        path: /etc/exports
+        line: "{{ item }}"
+      loop:
+        - "/data/k8s_int {{ exposed_network }}(rw,sync,no_subtree_check,no_root_squash)"
+      notify:
+        - nfs-service-reload
+      vars:
+        - exposed_network: "172.30.2.0/24"
+
+  handlers:
+    - name: nfs-service-reload
+      systemd:
+        name: nfs-kernel-server.service
+        state: reloaded
+        enabled: yes
+        no_block: yes

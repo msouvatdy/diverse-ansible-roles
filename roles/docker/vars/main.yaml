@@ -1,0 +1,10 @@
+---
+dep_package:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - git
+  - jq
+  - python3-pip

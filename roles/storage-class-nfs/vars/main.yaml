@@ -1,0 +1,5 @@
+kubeconfig: /home/ansible/cluster-int
+deployment_namespace: csi-nfs
+nfs_csi_server: 10.10.20.3
+nfs_csi_directory: /data/k8s_int
+masters: vkubmst1int

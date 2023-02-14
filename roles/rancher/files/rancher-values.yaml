@@ -1,0 +1,7 @@
+---
+hostname: superrancher.io
+replicas: 1
+#penser à passer le mot de passe en secret ansible
+bootstrapPassword: Aqwzsxedc@01
+persistance:
+  enabled: true

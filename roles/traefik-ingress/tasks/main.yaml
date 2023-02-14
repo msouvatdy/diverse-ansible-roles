@@ -1,0 +1,17 @@
+---
+#https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
+- name: Add stable chart repo
+  kubernetes.core.helm_repository:
+    name: traefik
+    repo_url: "https://traefik.github.io/charts"
+
+- name: Deploy traefik
+  kubernetes.core.helm:
+    name: ingress-traefik
+    chart_ref: traefik/traefik
+    release_namespace: traefik
+    create_namespace: true
+    #chart_version: "{{ traefik_version }}"
+    kubeconfig: "{{ kubeconfig }}"
+    values_files:
+      - "{{ role_path }}/files/helm_values.yaml"

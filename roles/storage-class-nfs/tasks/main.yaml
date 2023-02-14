@@ -1,0 +1,54 @@
+---
+#- name: label master node for CSI NFS Driver
+#  shell: "kubectl label --overwrite nodes {{ masters }} kubernetes.io/role=master"
+#  changed_when: false
+
+- name: add label to masters for CSI NFS Driver
+  kubernetes.core.k8s:
+    state: patched
+    kind: nodes
+    name: "{{ master }}"
+    definition:
+      metadata:
+        labels:
+          kubernetes.io/role: master
+
+- name: Add CSI NFS driver Helm repository
+  kubernetes.core.helm_repository:
+    name: csi-driver-nfs
+    repo_url: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+
+- name: Add CSI NFS driver
+  kubernetes.core.helm:
+    name: csi-driver-nfs
+    update_repo_cache: true
+    chart_ref: csi-driver-nfs/csi-driver-nfs
+    namespace: "{{ deployment_namespace }}"
+    create_namespace: yes
+    state: present
+    values_files:
+    - "{{ roles_path }}/files/values.yaml"
+
+- name: Creation du storageclass
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig }}"
+    state: present
+    definition:
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+        name: nfs-csi
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
+        provisioner: nfs.csi.k8s.io
+      parameters:
+        server: "{{ nfs_csi_server }}"
+        share: "{{ nfs_csi_directory }}"
+        subDir: '${pvc.metadata.namespace}-${pvc.metadata.name}'
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      mountOptions:
+      - hard
+      - nfsvers=4.1
+

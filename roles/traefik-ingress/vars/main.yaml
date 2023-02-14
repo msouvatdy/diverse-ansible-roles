@@ -1,0 +1,3 @@
+---
+kubeconfig: /home/ansible/.kube/config
+#traefik_version: 

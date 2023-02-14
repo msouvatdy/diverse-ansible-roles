@@ -1,0 +1,42 @@
+---
+- name: Mise à jour des packages
+  apt: 
+    update_cache: yes
+
+- name: "Installation des dépendances {{ dep_package }}"
+  apt:
+    name: "{{ dep_package }}"
+    state: present
+
+- name: Add Apt signing key from official docker repo
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add Docker's official repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: Installation de Docker
+  apt:
+    name: docker-ce
+    state: present
+
+- name: Ajout du repository nexus pour les images docker
+  blockinfile:
+    block: |
+      {
+      "insecure-registries" : [ "mysuper-registry.fr:8082" ]
+      }
+    create: true
+    marker: ""
+    path: /etc/docker/daemon.json
+  notify:
+  - Redemarrage de Docker
+
+- name: Démarrage du service Docker et enable de celui-ci
+  service:
+    name: docker
+    state: started
+    enabled: yes

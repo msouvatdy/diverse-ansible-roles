@@ -1,0 +1,43 @@
+---
+### Ajouter création du secret dans K8S, en utilisant le certificat et la clé
+### Modifier le fichier value.yml avec les paramètres de l'ingress
+#ingress:
+#  tls:
+#    source: secret
+#privateCA: true
+
+- name: Add stable chart repo
+  kubernetes.core.helm_repository:
+    name: "{{ item.key }}"
+    repo_url: "{{ item.value.url }}"
+  loop: "{{ query('dict', repo_helm) }}"
+
+
+#kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
+- name: Apply cert-manager.crds manifest to the cluster.
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/cert-manager.crds.yaml"
+    kubeconfig: "{{ kubeconfig }}"
+
+- name: Deploy cert-manager chart inside cert-manager namespace
+  kubernetes.core.helm:
+    name: cert-manager
+    chart_ref: jetstack/cert-manager
+    release_namespace: cert-manager
+    create_namespace: true
+    chart_version: "{{ cert_manager_version }}"
+    kubeconfig: "{{ kubeconfig }}"
+
+- name: Deploy Rancher chart inside cattle-system namespace
+  kubernetes.core.helm:
+    kubeconfig: "{{ kubeconfig }}"
+    name: rancher
+    create_namespace: true
+    chart_ref: rancher-stable/rancher
+    chart_version: "{{ rancher_version }}"
+    release_namespace: cattle-system
+    values_files:
+      - "{{ role_path }}/files/rancher-values.yaml"
+      
+      

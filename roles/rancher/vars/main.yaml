@@ -1,0 +1,10 @@
+---
+kubeconfig: /home/vagrant/.kube/config
+cert_manager_version: v1.7.1
+rancher_version: v2.7.1
+
+repo_helm:
+  rancher-stable: 
+    url: https://releases.rancher.com/server-charts/stable
+  jetstack: 
+    url: https://charts.jetstack.io
