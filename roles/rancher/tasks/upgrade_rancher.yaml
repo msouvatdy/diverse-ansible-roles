@@ -1,0 +1,14 @@
+---
+- name: Deploy Rancher chart inside cattle-system namespace
+  kubernetes.core.helm:
+    kubeconfig: "{{ kubeconfig }}"
+    name: rancher
+    replace: True
+    force: True
+    create_namespace: true
+    chart_ref: rancher-stable/rancher
+    chart_version: "{{ rancher_version }}"
+    release_namespace: cattle-system
+    values_files:
+      - "{{ role_path }}/files/rancher-values.yaml"
+  tags: upgrade_rancher

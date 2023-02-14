@@ -1,0 +1,55 @@
+---
+- name: Create SSL secret for Rancher
+  kubernetes.core.k8s:
+    state: absent
+    namespace: cattle-system
+    src: "{{ path_to_ca }}"
+    kubeconfig: "{{ kubeconfig }}"
+  when: privateCA == true
+  tags: ["never", "uninstall_rancher"]
+
+- name: Create secret for additional CA
+  kubernetes.core.k8s:
+    state: absent
+    namespace: cattle-system
+    src: "{{ path_to_add_ca }}"
+    kubeconfig: "{{ kubeconfig }}"
+  when: additionalTrustedCAs == true
+  tags: ["never", "uninstall_rancher"]
+
+- name: Deploy Rancher chart inside cattle-system namespace
+  kubernetes.core.helm:
+    kubeconfig: "{{ kubeconfig }}"
+    name: rancher
+    create_namespace: true
+    chart_ref: rancher-stable/rancher
+    chart_version: "{{ rancher_version }}"
+    release_namespace: cattle-system
+    state: absent
+  tags: ["never", "uninstall_rancher"]
+
+- name: uninstall cert-manager chart inside cert-manager namespace
+  kubernetes.core.helm:
+    name: cert-manager
+    chart_ref: jetstack/cert-manager
+    release_namespace: cert-manager
+    create_namespace: true
+    chart_version: "{{ cert_manager_version }}"
+    kubeconfig: "{{ kubeconfig }}"
+    state: absent
+  tags: ["never", "uninstall_rancher"]
+
+- name: Apply cert-manager.crds manifest to the cluster
+  kubernetes.core.k8s:
+    state: absent
+    src: "{{ role_path }}/files/cert-manager.crds.yaml"
+    kubeconfig: "{{ kubeconfig }}"
+  tags: ["never", "uninstall_rancher"]
+
+- name: Delete cattle-system namespace
+  kubernetes.core.k8s:
+    name: cattle-system
+    api_version: v1
+    kind: Namespace
+    state: absent
+  tags: ["never", "uninstall_rancher"]
