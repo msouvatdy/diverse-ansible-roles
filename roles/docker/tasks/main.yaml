@@ -24,14 +24,9 @@
     state: present
 
 - name: Ajout du repository nexus pour les images docker
-  blockinfile:
-    block: |
-      {
-      "insecure-registries" : [ "mysuper-registry.fr:8082" ]
-      }
-    create: true
-    marker: ""
-    path: /etc/docker/daemon.json
+  template:
+    src: "{{ roles }}/templates/daemon.json.j2"
+    dest: /etc/docker/daemon.json
   notify:
   - Redemarrage de Docker
   when: private_registry == true
