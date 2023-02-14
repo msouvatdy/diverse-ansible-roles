@@ -1,4 +1,5 @@
 ---
+private_registry: true
 dep_package:
   - apt-transport-https
   - ca-certificates
