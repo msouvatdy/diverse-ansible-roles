@@ -10,7 +10,7 @@ ingress:
   tls:
     source: secret
 #If private SSL certificate 
-privateCA: false
+privateCA: {{ privateCA }}
 
 #If you have private registries, catalogs or a proxy that intercepts certificates
-additionalTrustedCAs: false
+additionalTrustedCAs: {{ additionalTrustedCAs }}
