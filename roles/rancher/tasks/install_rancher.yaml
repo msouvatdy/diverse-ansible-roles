@@ -16,6 +16,7 @@
     api_version: v1
     kind: Namespace
     state: present
+    kubeconfig: "{{ kubeconfig }}"
 
 - name: Create SSL secret for Rancher
   kubernetes.core.k8s:
