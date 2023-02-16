@@ -6,9 +6,9 @@ bootstrapPassword: Aqwzsxedc@01
 persistance:
   enabled: true
 
-ingress:
-  tls:
-    source: secret
+#ingress:
+#  tls:
+#    source: secret
 #If private SSL certificate 
 privateCA: false
 
