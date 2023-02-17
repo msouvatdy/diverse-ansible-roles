@@ -19,7 +19,7 @@ global:
     caSecretName: ca
 
 certmanager-issuer:
-  email: me@example.com
+  email: supermail@example.com
  
 postgresql:
   image:
