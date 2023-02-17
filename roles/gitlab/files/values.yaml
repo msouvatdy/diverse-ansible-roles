@@ -1,0 +1,26 @@
+tls:
+  enabled: true
+  #wildcard certificate and key for domain used for domain
+  secretName: certif
+
+global:
+  edition: ce
+  hosts:
+    domain: supergitlab.com
+  certificates:
+    customCAs:
+#certificat CA en secret sur k8s
+#kubectl -n gitlab create secret generic my-custom-ca-secret --from-file=unique_name=my-custom-ca.pem
+      - secret: my-custom-ca-secret
+  
+  kas:
+    enabled: true
+    secretName: tls
+    caSecretName: ca
+
+certmanager-issuer:
+  email: me@example.com
+ 
+postgresql:
+  image:
+    tag: 13.6.0
