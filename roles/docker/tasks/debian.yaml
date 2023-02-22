@@ -29,7 +29,7 @@
     dest: /etc/docker/daemon.json
   notify:
   - Redemarrage de Docker
-  when: private_registry == "true" 
+  when: private_registry 
 
 - name: Démarrage du service Docker et enable de celui-ci
   service:
