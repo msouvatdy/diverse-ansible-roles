@@ -1,0 +1,6 @@
+---
+- name: unarchive helm
+  ansible.builtin.unarchive:
+    src: "https://get.helm.sh/helm-{{helm_version}}-{{os_type}}-{{architecture_type}}.tar.gz"
+    dest: /usr/local/bin/
+    remote_src: yes
