@@ -1,7 +1,0 @@
----
-#git clone https://github.com/k3s-io/k3s-ansible prérequis
-#ansible-galaxy collection install kubernetes.core
-- hosts: rancher
-  become: true
-  roles:
-  - rancher
