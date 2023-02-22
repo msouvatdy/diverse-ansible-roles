@@ -43,4 +43,4 @@
     path: /usr/local/bin/helm
   tags:
    - never
-   - uninstall
+   - uninstall_helm
