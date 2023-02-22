@@ -7,8 +7,8 @@
 
 - name: Create rancher-value.yaml
   template:
-    src: "{{ role_path }}/rancher-values.yaml"
-    dest: "{{ role_path }}/rancher-value.yaml"
+    src: "{{ role_path }}/files/rancher-values.yaml"
+    dest: "{{ role_path }}/files/rancher-value.yaml"
 
 - name: Create cattle-system namespace
   kubernetes.core.k8s:
