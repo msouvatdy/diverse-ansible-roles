@@ -1,2 +1,2 @@
 # diverse-ansible-roles
-This is a personnal project
+This is a random project
