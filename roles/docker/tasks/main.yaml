@@ -1,4 +1,4 @@
 ---
 - name: install Docker on Debian
   import_tasks: debian.yaml
-  when: "{{ 'True' if ansible_distribution|lower == 'debian' else 'False' }}"
+  when: "{{ ansible_distribution|lower == 'debian' }}"
