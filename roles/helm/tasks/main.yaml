@@ -30,14 +30,12 @@
     dest: /usr/local/bin/helm
     mode: u+rx,g-rx,o-rwx
   when: archive.changed
-  ignore_errors: true
 
 - name: remove installation archive
   file:
     state: absent
     path: "/tmp/{{ os_type }}-{{ architecture_type }}"
   when: archive.changed
-  ignore_errors: true
 
 - name: uninstall helm
   file:
