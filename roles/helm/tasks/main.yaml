@@ -1,6 +1,22 @@
 ---
+- name: verify if helm is present
+  file:
+    state: file
+    path: /usr/local/bin/helm
+  ignore_errors: true
+  register: helm
+
+- name: temp tasks for debug helm
+  debug:
+    msg: "{{helm}}"
+
 - name: unarchive helm
   ansible.builtin.unarchive:
     src: "https://get.helm.sh/helm-{{helm_version}}-{{os_type}}-{{architecture_type}}.tar.gz"
-    dest: /usr/local/bin/
+    dest: /tmp/
     remote_src: yes
+  register: archive
+
+- name: temp tasks for debug archive
+  debug:
+    msg: "{{archive}}"
