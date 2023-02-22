@@ -20,7 +20,9 @@
     dest: /tmp/
     remote_src: yes
   register: archive2
-  when: upgrade == true
+  tags:
+    - never
+    - upgrade_helm
 
 - name: set helm to /usr/local/bin/helm
   copy:

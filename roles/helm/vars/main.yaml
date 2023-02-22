@@ -1,5 +1,4 @@
 ---
-upgrade: false
 #check https://github.com/helm/helm/releases for all version available
 helm_version: v3.11.1
 #supported value: linux and darwin 
