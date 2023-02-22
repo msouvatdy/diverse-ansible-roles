@@ -29,4 +29,5 @@ Le roles dispose d'un tag upgrade_helm permettant de réinstaller Helm.
 ## Désinstallation de Helm
 
 Le roles dispose d'un tag permettant la désinstallation de Helm. (Suppression du binaire se situant dans /usr/local/bin/helm)
+
 `ansible-playbook myplaybook.yaml -t uninstall_helm`
