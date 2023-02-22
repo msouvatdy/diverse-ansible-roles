@@ -9,7 +9,7 @@
 
     - name: Create export dir
       file:
-        path: /data/k8s_int
+        path: /data/k8s
         state: directory
         mode: '0777'
 
@@ -19,11 +19,11 @@
         path: /etc/exports
         line: "{{ item }}"
       loop:
-        - "/data/k8s_int {{ exposed_network }}(rw,sync,no_subtree_check,no_root_squash)"
+        - "/data/k8s {{ exposed_network }}(rw,sync,no_subtree_check,no_root_squash)"
       notify:
         - nfs-service-reload
       vars:
-        - exposed_network: "172.30.2.0/24"
+        - exposed_network: "10.10.20.0/24"
 
   handlers:
     - name: nfs-service-reload
