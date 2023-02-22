@@ -6,17 +6,30 @@
   ignore_errors: true
   register: helm
 
-- name: temp tasks for debug helm
-  debug:
-    msg: "{{helm}}"
-
-- name: unarchive helm
+- name: unarchive helm for install
   ansible.builtin.unarchive:
     src: "https://get.helm.sh/helm-{{helm_version}}-{{os_type}}-{{architecture_type}}.tar.gz"
     dest: /tmp/
     remote_src: yes
   register: archive
+  when: helm.failed == true
 
-- name: temp tasks for debug archive
-  debug:
-    msg: "{{archive}}"
+- name: unarchive helm for upgrade
+  ansible.builtin.unarchive:
+    src: "https://get.helm.sh/helm-{{helm_version}}-{{os_type}}-{{architecture_type}}.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+  register: archive2
+  when: "{{ upgrade }} == true"
+
+- name: set helm to /usr/local/bin/helm
+  copy:
+    src: "/tmp/{{ os_type }}-{{ architecture_type }}/helm"
+    dest: /usr/local/bin/helm
+  when: archive.changed or archive2.changed
+
+- name: remove installation archive
+  file:
+    state: absent
+    path: "/tmp/{{ os_type }}-{{ architecture_type }}"
+  when: archive.changed or archive2.changed
