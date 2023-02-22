@@ -1,0 +1,19 @@
+- name: install nfs-server
+  apt:
+    name: nfs-kernel-server
+    state: present
+    update_cache: yes
+
+- name: Create export dir
+  file:
+    path: "{{ mount_path }}"
+    state: directory
+    mode: '0777'
+
+- name: configure nfs export
+  lineinfile:
+    create: yes
+    path: /etc/exports
+    line: "{{ mount_path }} {{ exposed_network }}(rw,sync,no_subtree_check,no_root_squash)"
+  notify:
+    - nfs-service-reload

@@ -1,0 +1,6 @@
+- name: nfs-service-reload
+  systemd:
+    name: nfs-kernel-server.service
+    state: reloaded
+    enabled: yes
+    no_block: yes
