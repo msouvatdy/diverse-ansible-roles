@@ -24,6 +24,7 @@ Créer un playbook appelant le roles et l'exécuter. Exemple:
 ## Mise à jour de Helm
 
 Le roles dispose d'un tag upgrade_helm permettant de réinstaller Helm.
+
 `ansible-playbook myplaybook.yaml -t upgrade_helm`
 
 ## Désinstallation de Helm
