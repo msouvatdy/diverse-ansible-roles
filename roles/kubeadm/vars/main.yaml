@@ -8,3 +8,7 @@ containerd_service: https://raw.githubusercontent.com/containerd/containerd/main
 #All release of runc
 #https://github.com/opencontainers/runc/releases
 version_runc: v1.1.2
+
+kubelet_ver: 1.26.1-00
+kubeadm_ver: 1.26.1-00
+kubectl_ver: 1.26.1-00
