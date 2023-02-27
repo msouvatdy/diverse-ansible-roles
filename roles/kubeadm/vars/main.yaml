@@ -1,0 +1,6 @@
+---
+#all release of containerd
+#https://github.com/containerd/containerd/releases
+containerd_version: 1.6.18
+architecture: amd64
+os: linux

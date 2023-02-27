@@ -31,3 +31,17 @@
     path: /etc/fstab
     regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
     replace: '# \1'
+
+- name: verify if containerd is installed
+  service:
+    name: containerd
+    state: started
+  ignore_errors: true
+  register: containerd_installed
+
+- name: Download and unarchive containerd  
+  ansible.builtin.unarchive:
+    src: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-{{ os }}-{{ architecture }}.tar.gz"
+    dest: /usr/local
+    remote_src: yes
+  when: containerd_installed.failed == true
