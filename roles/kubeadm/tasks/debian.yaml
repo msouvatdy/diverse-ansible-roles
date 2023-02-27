@@ -74,10 +74,9 @@
   register: runc
 
 - name: Download and unarchive runc
-  ansible.builtin.unarchive:
-    src: "https://github.com/opencontainers/runc/releases/download/{{ version_runc }}/runc.{{ architecture }}"
+  get_url:
+    url: "https://github.com/opencontainers/runc/releases/download/{{ version_runc }}/runc.{{ architecture }}"
     dest: /tmp/
-    remote_src: yes
   when: runc.failed == true
 
 - name: copy runc binary to /usr/local/sbin
