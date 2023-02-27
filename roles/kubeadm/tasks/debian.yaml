@@ -15,6 +15,7 @@
     src: "{{ role_path }}/files/k8s.conf-sysctl"
     dest: /etc/sysctl.d/k8s.conf
   register: k8s_conf
+  notify: reboot
 
 - name: reload sysctl
   command: sysctl --system
