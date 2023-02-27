@@ -113,7 +113,7 @@
   lineinfile:
     path: /etc/apt/sources.list.d/kubernetes.list
     state: present
-    line: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
+    line: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
     create: yes
 
 - name: install kubelet kubeadm kubectl
