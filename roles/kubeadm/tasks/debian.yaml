@@ -127,8 +127,9 @@
 
 - name: hold kubeadm, kubelet and kubectl
   dpkg_selections:
-    name:
-    - kubeadm
-    - kubelet
-    - kubectl
+    name: "{{ item}}" 
     selection: hold
+  loop:
+  - kubeadm
+  - kubelet
+  - kubectl
