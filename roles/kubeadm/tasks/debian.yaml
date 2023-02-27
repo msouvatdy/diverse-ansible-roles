@@ -106,6 +106,7 @@
     #url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     url: https://web.archive.org/web/20230223152417if_/https://packages.cloud.google.com/apt/doc/apt-key.gpg 
     state: present
+    keyring: /usr/share/keyrings/cloud.google.gpg
 
 - name: add kubernetes source
   lineinfile:
