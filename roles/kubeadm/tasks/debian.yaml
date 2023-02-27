@@ -121,6 +121,7 @@
     - "kubeadm={{ kubeadm_ver }}"
     - "kubectl={{ kubectl_ver }}"
     state: present
+    update_cache: yes
 
 - name: hold kubeadm, kubelet and kubectl
   dpkg_selections:
