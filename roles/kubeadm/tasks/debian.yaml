@@ -64,3 +64,4 @@
     daemon_reload: true
     name: containerd
     state: started
+    enabled: true
