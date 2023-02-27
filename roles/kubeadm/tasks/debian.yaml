@@ -52,7 +52,7 @@
 - name: create /usr/local/lib/systemd/system 
   file:
     path: /usr/local/lib/systemd/system
-    state: folder
+    state: directory
 
 - name: create containerd.service
   get_url:
