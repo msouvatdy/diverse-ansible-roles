@@ -1,0 +1,36 @@
+---
+- name: update all package
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+
+- name: Adding k8s.conf in /etc/modules-load.d
+  copy:
+    src: "{{ roles_path }}/files/k8s.conf-modules-load"
+    dest: /etc/modules-load.d/k8s.conf
+
+- name: Adding k8s.conf in /etc/sysctl.d/
+  copy:
+    src: "{{ roles_path }}/files/k8s.conf-systctl"
+    dest: /etc/sysctl.d/k8s.conf
+  notify: 
+  - reload sysctl
+
+- name: check if SWAP is on
+  command: swapon -s
+  register: swap
+  changed_when: false
+
+- name: debug
+  debug:
+    msg: "{{swap}}"
+
+- name: Disable SWAP since kubernetes can't work with swap enabled (1/2)
+  command: swapoff -a
+
+- name: Disable SWAP in fstab since kubernetes can't work with swap enabled (2/2)
+  replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
