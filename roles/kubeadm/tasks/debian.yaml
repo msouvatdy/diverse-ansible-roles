@@ -14,8 +14,11 @@
   copy:
     src: "{{ role_path }}/files/k8s.conf-sysctl"
     dest: /etc/sysctl.d/k8s.conf
-  notify: 
-  - reload sysctl
+  register: k8s_conf
+
+- name: reload sysctl
+  command: sysctl --system
+  when: k8s_conf.changed
 
 - name: check if SWAP is on
   command: swapon -s
@@ -45,3 +48,14 @@
     dest: /usr/local
     remote_src: yes
   when: containerd_installed.failed == true
+
+- name: create containerd.service
+  get_url:
+    url: "{{ containerd_service }}"
+    dest: /usr/local/lib/systemd/system/containerd.service
+
+- name: Force systemd to reread configs and enable containerd
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: containerd
+    state: started
