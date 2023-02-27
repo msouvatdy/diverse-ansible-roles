@@ -4,4 +4,7 @@
 containerd_version: 1.6.18
 architecture: amd64
 os: linux
-containerd_service: https://raw.githubusercontent.com/containerd/containerd/main/containerd.service 
+containerd_service: https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+#All release of runc
+#https://github.com/opencontainers/runc/releases
+version_runc: v1.1.2

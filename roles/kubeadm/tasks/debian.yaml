@@ -65,3 +65,31 @@
     name: containerd
     state: started
     enabled: true
+
+- name: Check if runc is installed
+  file:
+    path: /usr/local/sbin/runc
+    state: present
+  ignore_errors: true
+  register: runc
+
+- name: Download and unarchive runc
+  ansible.builtin.unarchive:
+    src: "https://github.com/opencontainers/runc/releases/download/{{ version_runc }}/runc.{{ architecture }}"
+    dest: /tmp/
+    remote_src: yes
+  when: runc.failed == true
+
+- name: copy runc binary to /usr/local/sbin
+  copy:
+    src: "/tmp/runc.{{ architecture }}"
+    dest: /usr/local/sbin/runc
+    mode: '0755'
+    remote_src: yes
+  when: runc.failed == true
+
+- name: Remove runc archive 
+  file:
+    path: "/tmp/runc.{{ architecture }}"
+    state: absent
+  when: runc.failed == true
