@@ -103,7 +103,8 @@
 
 - name: Add an Apt signing key https://packages.cloud.google.com/apt/doc/apt-key.gpg 
   ansible.builtin.apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg 
+    #url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    url: https://web.archive.org/web/20230223152417if_/https://packages.cloud.google.com/apt/doc/apt-key.gpg 
     state: present
 
 - name: add kubernetes source
