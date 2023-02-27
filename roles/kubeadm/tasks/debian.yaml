@@ -69,7 +69,7 @@
 - name: Check if runc is installed
   file:
     path: /usr/local/sbin/runc
-    state: present
+    state: file
   ignore_errors: true
   register: runc
 
