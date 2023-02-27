@@ -52,7 +52,7 @@
 - name: create containerd.service
   get_url:
     url: "{{ containerd_service }}"
-    dest: /usr/local/lib/systemd/system/containerd.service
+    dest: /usr/local/lib/systemd/system/
 
 - name: Force systemd to reread configs and enable containerd
   ansible.builtin.systemd:
