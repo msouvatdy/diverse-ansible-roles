@@ -49,6 +49,11 @@
     remote_src: yes
   when: containerd_installed.failed == true
 
+- name: create /usr/local/lib/systemd/system 
+  file:
+    path: /usr/local/lib/systemd/system
+    state: folder
+
 - name: create containerd.service
   get_url:
     url: "{{ containerd_service }}"
