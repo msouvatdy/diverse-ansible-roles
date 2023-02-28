@@ -26,11 +26,11 @@
   register: swap
   changed_when: false
 
-- name: Disable SWAP since kubernetes can't work with swap enabled (1/2)
+- name: Disable SWAP (1/2)
   command: swapoff -a
   when: swap.stdout != ""
 
-- name: Disable SWAP in fstab since kubernetes can't work with swap enabled (2/2)
+- name: Disable SWAP in fstab (2/2)
   replace:
     path: /etc/fstab
     regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
@@ -44,7 +44,7 @@
   register: containerd_installed
 
 - name: Download and unarchive containerd  
-  ansible.builtin.unarchive:
+  unarchive:
     src: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-{{ os }}-{{ architecture }}.tar.gz"
     dest: /usr/local
     remote_src: yes
@@ -61,7 +61,7 @@
     dest: /usr/local/lib/systemd/system/
 
 - name: Force systemd to reread configs and enable containerd
-  ansible.builtin.systemd:
+  systemd:
     daemon_reload: true
     name: containerd
     state: started
@@ -103,10 +103,8 @@
     state: present
 
 - name: Add an Apt signing key https://dl.k8s.io/apt/doc/apt-key.gpg
-  ansible.builtin.apt_key:
+  apt_key:
     url: https://dl.k8s.io/apt/doc/apt-key.gpg
-    #url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    #url: https://web.archive.org/web/20230223152417if_/https://packages.cloud.google.com/apt/doc/apt-key.gpg 
     state: present
     keyring: /usr/share/keyrings/cloud.google.gpg
 
