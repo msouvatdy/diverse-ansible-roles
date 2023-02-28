@@ -3,8 +3,8 @@ sudo apt update -y
 sudo apt install git ansible vim -y
 sudo mkdir -p /etc/ansible
 sudo echo "debian" >> /etc/ansible/hosts
-git clone https://github.com/msouvatdy/diverse-ansible-roles.git
-
+sudo git clone https://github.com/msouvatdy/diverse-ansible-roles.git
+sudo chown -R vagrant:vagrant /home/vagrant/diverse-ansible-roles
 mkdir /home/vagrant/.ssh
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDalwOSFcijdV9DSm30ukXPgk7BHkphlBldOkluDf5YcYg489cZdibOeySribIGdMS/0omLmxgvmhQ+xIl6cX2cSQAJz0WJrl/SieW9aeWxeH0t7cG6AssstHOX/N93NRFPNNCepmkzNLqwiY4W8UwKxOBmOtf4HP66PrYDd0FwfOKlO3G/6lUaeA83ZbTYhMHiuo2aIrl+rApQZeFuvjPtPfsLA6/yGfRIpNLUP97PXyFROLgba/PhD/pPusFRlioHD7GcUIzu/QMk9d1wSkqzdLP/hU38k0CxEyQCHJTT3PEZz6ciLpyAtO74bi9WT+fLg2GsgFEbHARb8XD7i7FrYHFsqEq9OpxChq24WgN6UYaRzqO/xCN2MhYPoswyQOy1p8qZjzo4gEKRt7q0RwFcCNJGgGXrEBjp6VSY5Id4tvdYx+hJNi6RPrD0dwmCBoYW34HGVdzKIbh6mts1PYmj+1Xdm62FGXzLKtXRqZ9oMA2jkLrX3X3h1iSaWu4Jl58= vagrant@debian" >> /home/vagrant/.ssh/authorized_keys
 
