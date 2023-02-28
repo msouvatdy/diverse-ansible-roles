@@ -1,6 +1,9 @@
 $script = <<-SCRIPT
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install git ansible vim -y
+sudo mkdir -p /etc/ansible
+sudo echo "debian" >> /etc/ansible/hosts
+git clone https://github.com/msouvatdy/diverse-ansible-roles.git 
 SCRIPT
 
 Vagrant.configure("2") do |config|
