@@ -1,5 +1,4 @@
 ---
-private_registry: false
 registry: "mysuper-registry.fr:8082"
 dep_package:
   - apt-transport-https

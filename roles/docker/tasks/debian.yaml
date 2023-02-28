@@ -24,12 +24,12 @@
     state: present
 
 - name: Ajout du private registry pour les images docker
-  template:
-    src: "{{ roles }}/templates/daemon.json.j2"
-    dest: /etc/docker/daemon.json
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: "{ 'insecure-registries' : [ {{ registry }} ]}"
   notify:
   - Redemarrage de Docker
-  when: private_registry 
+  when: registry | length != 0 
 
 - name: Démarrage du service Docker et enable de celui-ci
   service:
