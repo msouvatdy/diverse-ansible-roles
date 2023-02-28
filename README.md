@@ -2,6 +2,21 @@
 This is a random project
 All roles have been tested on debian 11
 
+# What kind of roles ?
+
+In each role folder, there is a README that explain all variables used by the role and how to use it.
+
+| Role | Purpose of the role|
+|----------------|-------------------------------|
+| docker | install docker |
+| gitlab | install gitlab using ansible helm module|
+| helm   | install helm binary  |
+| kubeadm | install containerd and kubeadm|
+| nfs   | install a nfs server|
+| rancher | instzll rancher using ansible helm module|
+| storage-class-nfs | install storage class and csi-storage-nfs via ansible helm module|
+| traefik-ingress| install ingress controller Traefik using ansible helm module|
+
 # Test the project
 
 ## Creating the environment
