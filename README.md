@@ -1,10 +1,12 @@
 # diverse-ansible-roles
-This is a random project
+This is a random project.
 All roles have been tested on debian 11
 
 # What kind of roles ?
 
 In each role folder, there is a README that explain all variables used by the role and how to use it.
+
+Some roles are not developed yet
 
 | Role | Purpose of the role|
 |----------------|-------------------------------|
@@ -13,7 +15,7 @@ In each role folder, there is a README that explain all variables used by the ro
 | helm   | install helm binary  |
 | kubeadm | install containerd and kubeadm|
 | nfs   | install a nfs server|
-| rancher | instzll rancher using ansible helm module|
+| rancher | install rancher using ansible helm module|
 | storage-class-nfs | install storage class and csi-storage-nfs via ansible helm module|
 | traefik-ingress| install ingress controller Traefik using ansible helm module|
 
