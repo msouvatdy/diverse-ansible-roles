@@ -1,12 +1,12 @@
-# diverse-ansible-roles
+# Diverse-ansible-roles
 This is a random project.
-All roles have been tested on debian 11
+All roles have been tested on debian 11 for the moment.
 
 # What kind of roles ?
 
 In each role folder, there is a README that explain all variables used by the role and how to use it.
 
-Some roles are not developed yet
+> **Note:** Some roles are not developed or fully developed yet.
 
 | Role | Purpose of the role|
 |----------------|-------------------------------|
@@ -22,8 +22,8 @@ Some roles are not developed yet
 # Test the project
 
 ## Creating the environment
-In order to test all my ansible roles, here is how I setup my environment
-First, I am using VirtualBox in version 7.0.6 r155176 and vagrant in version 2.3.4
+In order to test all my ansible roles, here is how I setup my environment.
+First, I am using VirtualBox in version 7.0.6 r155176 and vagrant in version 2.3.4 .
 
 Here is my Vagrantfile
 ```bash
