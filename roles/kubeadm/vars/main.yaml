@@ -7,7 +7,10 @@ os: linux
 containerd_service: https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 #All release of runc
 #https://github.com/opencontainers/runc/releases
-version_runc: v1.1.2
+version_runc: v1.1.
+
+#other key: https://dl.k8s.io/apt/doc/apt-key.gpg
+key: https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
 kubelet_ver: 1.26.1-00
 kubeadm_ver: 1.26.1-00

@@ -102,11 +102,10 @@
     - curl
     state: present
 
-- name: Add an Apt signing key https://dl.k8s.io/apt/doc/apt-key.gpg
+- name: Add an Apt signing key 
   apt_key:
-    url: https://dl.k8s.io/apt/doc/apt-key.gpg
+    url: "{{ key }}"
     state: present
-    keyring: /usr/share/keyrings/cloud.google.gpg
 
 - name: add kubernetes source
   lineinfile:
