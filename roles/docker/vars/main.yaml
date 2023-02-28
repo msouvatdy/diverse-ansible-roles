@@ -7,6 +7,4 @@ dep_package:
   - curl
   - gnupg
   - lsb-release
-  - git
   - jq
-  - python3-pip

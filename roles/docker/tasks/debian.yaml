@@ -23,7 +23,7 @@
     name: docker-ce
     state: present
 
-- name: Ajout du repository nexus pour les images docker
+- name: Ajout du private registry pour les images docker
   template:
     src: "{{ roles }}/templates/daemon.json.j2"
     dest: /etc/docker/daemon.json
