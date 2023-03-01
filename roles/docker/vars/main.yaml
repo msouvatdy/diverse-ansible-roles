@@ -1,5 +1,6 @@
 ---
-insecure_registry: "mysuper-registry.fr:8082"
+#insecure_registry: "mysuper-registry.fr:8082"
+insecure_registry: ""
 dep_package:
   - apt-transport-https
   - ca-certificates
