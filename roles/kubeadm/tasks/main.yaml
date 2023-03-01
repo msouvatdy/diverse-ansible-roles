@@ -1,5 +1,5 @@
 ---
 #ansible-galaxy collection install ansible.posix
-- name: install kubeadm on debian
+- name: install kubeadm on debian like
   import_tasks: debian.yaml
-  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  when: (ansible_distribution|lower == 'debian') or (ansible_distribution|lower == 'ubuntu' and ansible_distribution_version == '20.04')
