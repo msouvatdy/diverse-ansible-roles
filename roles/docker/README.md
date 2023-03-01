@@ -2,21 +2,23 @@
 
 The purpose of this role is to install docker-ce on debian machine
 
-# Variables
+## Variables
 
-## Parameters:
+### Parameters
+
 |                | Default value                         | Supported values                         |
 |----------------|-------------------------------|-----------------------------|
-| insecure_registry |	`""` | your insecure registry           |
+| insecure_registry | `""` | your insecure registry           |
 
-
-# Utilisation du role
+## Utilisation du role
 
 Create a playbook and execute it. Example:
+
 ```bash
 - hosts: my_servers
   become: true
   roles:
   - docker
 ```
+
 `ansible-playbook myplaybook.yaml`
