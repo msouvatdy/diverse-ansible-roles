@@ -3,3 +3,10 @@
 - name: install kubeadm on debian like
   import_tasks: debian.yaml
   when: (ansible_distribution|lower == 'debian' and ansible_distribution_version == '11') or (ansible_distribution|lower == 'ubuntu' and ansible_distribution_version == '20.04')
+
+- name: upgrade kubeadm on debian like
+  import_tasks: upgrade_kubeadm_debian.yaml
+  when: (ansible_distribution|lower == 'debian' and ansible_distribution_version == '11') or (ansible_distribution|lower == 'ubuntu' and ansible_distribution_version == '20.04')
+  tags:
+    - never
+    - upgrade_kubeadm

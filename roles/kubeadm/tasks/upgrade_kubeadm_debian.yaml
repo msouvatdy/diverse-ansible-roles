@@ -1,0 +1,42 @@
+---
+- name: drain node "{{ ansible_hostname }}"
+  command: "kubectl drain {{ ansible_hostname }} --ignore-daemonset"
+  tags:
+    - never
+    - upgrade_kubeadm  
+
+- name: unhold kubeadm, kubelet and kubectl
+  dpkg_selections:
+    name: "{{ item}}" 
+    selection: install  
+  loop:
+  - kubeadm
+  - kubelet
+  - kubectl
+  tags:
+    - never
+    - upgrade_kubeadm
+
+- name: upgrade kubeadm, kubectl and kubelet to specified version
+  apt:
+    name:
+    - "kubelet={{ kubelet_ver }}"
+    - "kubeadm={{ kubeadm_ver }}"
+    - "kubectl={{ kubectl_ver }}"
+    state: present
+    update_cache: yes
+  tags:
+    - never
+    - upgrade_kubeadm
+
+- name: hold kubeadm, kubelet and kubectl
+  dpkg_selections:
+    name: "{{ item}}" 
+    selection: hold
+  loop:
+  - kubeadm
+  - kubelet
+  - kubectl
+  tags:
+    - never
+    - upgrade_kubeadm
