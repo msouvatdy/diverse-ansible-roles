@@ -21,11 +21,17 @@ sudo pip install jsonpatch
 |                | Default value                         | Supported values                         |
 |----------------|-------------------------------|-----------------------------|
 | kubeconfig | `"/home/vagrant/.kube/config"` | The path absolute path to your kubeconfig file           |
+| hostname_ingress | `superrancher.io` | hostname for your ingress |
+| cert_manager_version | `v1.7.1` | version of the cert_manager |
+| rancher_version | `v2.7.1` | version of rancher |
+| privateCA | `false` | true or false |
+| ingress_tls | `false` | true or false |
+| default_password | `Aqwzsxedc@01` | the default password for rancher |
 
 ## Use the rancher role
 
 Create a playbook and execute it. Example:
-> **Note:**You need to install helm in order to use this role
+> Note: You need to install helm in order to use this role
 
 ```bash
 - hosts: my_servers
