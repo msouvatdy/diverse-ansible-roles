@@ -6,9 +6,12 @@ bootstrapPassword: Aqwzsxedc@01
 persistance:
   enabled: true
 
+{% if ingress_tls == true }
 ingress:
   tls:
     source: secret
+{% endif %}
+
 #If private SSL certificate 
 privateCA: {{ privateCA }}
 
