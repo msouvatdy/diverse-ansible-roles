@@ -50,11 +50,17 @@ Create a playbook and execute it. Example:
 openssl req -x509 -newkey rsa:4096 -days 365 -nodes -keyout ca-key.pem -out cacerts.pem -subj "/C=FR/ST=Ile de France/L=Paris/O=Super Company/OU=Super Test/CN=*.superrancher.io/emailAddress=super.example@example.com"
 
 /C=FR Country
+
 /ST=Ile de France  State or province
+
 /L=Paris City
+
 /O=Super Company  Organisation
+
 /OU=Super Test Organisation Unit
+
 /CN=*.superrrancher.io Common Name or domain name
+
 /emailAddress=super.example@example.com address
 
 ### Generate web server's private key and certificate signing request (CSR) (optional)
