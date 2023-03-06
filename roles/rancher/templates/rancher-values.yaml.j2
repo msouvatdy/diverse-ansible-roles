@@ -1,8 +1,7 @@
 ---
-hostname: superrancher.io
+hostname: {{ hostname_ingress }}
 replicas: 1
-#penser à passer le mot de passe en secret ansible
-bootstrapPassword: Aqwzsxedc@01
+bootstrapPassword: {{ default_password }}
 persistance:
   enabled: true
 
@@ -12,8 +11,10 @@ ingress:
     source: secret
 {% endif %}
 
-#If private SSL certificate 
+{% if privateCA == true %}
 privateCA: {{ privateCA }}
+{% endif %}
 
-#If you have private registries, catalogs or a proxy that intercepts certificates
+{% if additionalTrustedCAs == true %}
 additionalTrustedCAs: {{ additionalTrustedCAs }}
+{% endif %}
