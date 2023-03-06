@@ -18,13 +18,23 @@
     state: present
     kubeconfig: "{{ kubeconfig }}"
 
-- name: Create SSL secret for Rancher
+- name: Check if CA secret for Rancher is present
   kubernetes.core.k8s:
     state: present
     namespace: cattle-system
-    src: "{{ path_to_ca }}"
+    kind: secret
     kubeconfig: "{{ kubeconfig }}"
+    name: tls-ca
   when: privateCA == true
+
+- name: Check if TLS secret for Rancher ingress is present
+  kubernetes.core.k8s:
+    state: present
+    namespace: cattle-system
+    kind: secret
+    kubeconfig: "{{ kubeconfig }}"
+    name: tls-rancher-ingress
+  when: ingress_tls == true
 
 - name: Create secret for additional CA
   kubernetes.core.k8s:
