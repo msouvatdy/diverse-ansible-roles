@@ -7,7 +7,7 @@
 
 - name: Create rancher-values.yaml
   template:
-    src: "{{ role_path }}/templates/rancher-values.yaml"
+    src: "{{ role_path }}/templates/rancher-values.yaml.j2"
     dest: "{{ role_path }}/files/rancher-values.yaml"
 
 - name: Create cattle-system namespace
