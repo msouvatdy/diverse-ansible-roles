@@ -1,0 +1,16 @@
+---
+type_of_install: package
+external_url: "https://super-gitlab.com"
+
+dependencies:
+- curl 
+- openssh-server 
+- ca-certificates 
+- perl
+- postfix
+- gnupg
+- debian-archive-keyring
+- apt-transport-https
+
+key: "https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey"
+deb_rep: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/config_file.list?os=debian&dist=11&source=script

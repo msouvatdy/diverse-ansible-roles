@@ -1,0 +1,34 @@
+---
+- name: install dependencies
+  apt:
+    name: "{{ dependencies }}"
+    state: present
+    update_cache: yes
+
+- name: Add an Apt signing key 
+  apt_key:
+    url: "{{ key }}"
+    state: present
+
+- name: add gitlab source
+  lineinfile:
+    path: /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+    state: present
+    create: yes
+    block: |
+      deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
+      deb-src [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
+
+- name: copy trusted.gpg.d
+  copy:
+    src: /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
+    dest: /etc/apt/trusted.gpg.d/gitlab_gitlab-ce.gpg
+    remote_src: yes
+
+- name: install gitlab-ce
+  apt:
+    name: gitlab-ce
+    state: present
+    update_cache: yes
+  environment:
+    EXTERNAL_URL: "{{ external_url }}"
