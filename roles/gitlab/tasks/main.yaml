@@ -1,7 +1,12 @@
 ---
-- name: install gilab on debian 11
+- name: install gitlab on debian 11
   import_tasks: debian11.yaml
   when: 
   - ansible_distribution|lower == 'debian' 
   - ansible_distribution_version == '11'
   - type_of_install == 'package'
+
+- name: install gitlab with helm on a k8s cluster
+  import_tasks: gitlab_helm.yaml
+  when:
+  - type_of_install == 'k8s'
