@@ -60,7 +60,7 @@ openssl req -x509 -newkey rsa:4096 -days 365 -nodes -keyout ca-key.pem -out cace
 | L | Paris | City |
 | O | Super Company | Organisation |
 | OU | Super Test | Organisation Unit |
-|CN | *.superrrancher.io | Common Name or domain name |
+|CN | *.superrancher.io | Common Name or domain name |
 |emailAddress |super.example@example.com | address|
 
 ### Generate web server's private key and certificate signing request (CSR) (optional)
