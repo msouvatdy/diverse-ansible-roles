@@ -15,6 +15,7 @@
     path: /etc/apt/sources.list.d/gitlab_gitlab-ce.list
     state: present
     create: yes
+    marker: ""
     block: |
       deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
       deb-src [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
