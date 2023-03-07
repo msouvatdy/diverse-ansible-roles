@@ -4,7 +4,8 @@ The purpose of this role is to install Rancher-ce on a Kubernetes cluster
 
 ## Prerequisite
 
-You will need to install multiple ansible collection and python package in order to use this role
+You need to have a Kubernetes cluster in order to install Rancher.
+You will also need to install multiple ansible collection and python package in order to use this role
 
 ```bash
 ansible-galaxy collection install kubernetes.core
