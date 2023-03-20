@@ -12,7 +12,7 @@ In each role folder, there is a README that explain all variables used by the ro
 | Role | Purpose of the role|
 |----------------|-------------------------------|
 | docker | install docker |
-| gitlab | install gitlab using ansible helm module|
+| gitlab | install gitlab |
 | helm   | install helm binary  |
 | kubeadm | install containerd and kubeadm|
 | nfs   | install a nfs server|
