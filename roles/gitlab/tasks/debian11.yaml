@@ -11,7 +11,7 @@
     state: present
 
 - name: add gitlab source
-  lineinfile:
+  blockinfile:
     path: /etc/apt/sources.list.d/gitlab_gitlab-ce.list
     state: present
     create: yes
