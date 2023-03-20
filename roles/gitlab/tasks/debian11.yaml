@@ -12,12 +12,12 @@
 
 - name: adding repo gitlab (1/2)
   apt_repository:
-    repo: deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
+    repo: deb [signed-by=/etc/apt/trusted.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
     state: present
 
 - name: adding repo gitlab (2/2)
   apt_repository:
-    repo: deb-src [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
+    repo: deb-src [signed-by=/etc/apt/trusted.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
     state: present
 
 - name: install gitlab-ce
