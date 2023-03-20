@@ -10,26 +10,15 @@
     url: "{{ key }}"
     state: present
 
-- name: add gitlab source
-  blockinfile:
-    path: /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+- name: adding repo gitlab (1/2)
+  apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
     state: present
-    create: yes
-    marker: ""
-    block: |
-      deb [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
-      deb-src [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
 
-- name: Import a key from a url
-  rpm_key:
+- name: adding repo gitlab (2/2)
+  apt_repository:
+    repo: deb-src [signed-by=/usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
     state: present
-    key: "{{ key }}"
-
-- name: copy trusted.gpg.d
-  copy:
-    src: /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
-    dest: /etc/apt/trusted.gpg.d/gitlab_gitlab-ce.gpg
-    remote_src: yes
 
 - name: install gitlab-ce
   apt:
