@@ -46,6 +46,8 @@
     src: "{{ role_path }}/files/gitlab.rb"
     dest: "/etc/gitlab/gitlab.rb"
   when: private_cert.use_private_cert == "yes"
+  notify:
+  - reconfigure gitlab
   
 - name: install gitlab-ce
   apt:
