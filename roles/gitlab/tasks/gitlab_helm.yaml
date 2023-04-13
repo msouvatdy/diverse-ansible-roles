@@ -1,2 +1,16 @@
 ---
-#tasks will be added later
+- name: Add stable chart repo for gitlab
+  kubernetes.core.helm_repository:
+    name: "gitlab"
+    repo_url: "https://charts.gitlab.io/"
+
+- name: Deploy gitlab-ce
+  kubernetes.core.helm:
+    name: gitlab
+    chart_ref: gitlab/gitlab
+    release_namespace: gitlab
+    create_namespace: true
+    chart_version: "{{ gitlab_chart_version }}"
+    kubeconfig: "{{ kubeconfig }}"
+    values_files:
+      - "{{ role_path }}/files/values.yaml"

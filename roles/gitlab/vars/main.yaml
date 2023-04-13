@@ -7,6 +7,9 @@ private_cert:
   key_path: /your_path_to_key
   crt_path: /your_path_to_crt 
 
+kubeconfig: /home/vagrant/.kube/config
+gitlab_chart_version: 6.10.2
+
 dependencies:
 - curl 
 - openssh-server 
