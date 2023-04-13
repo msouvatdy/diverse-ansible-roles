@@ -53,6 +53,7 @@
   lineinfile:
     path: "/etc/gitlab/gitlab.rb"
     line: "external_url \"https://{{ external_url }}\""
+  when: private_cert.use_private_cert == true
 
 - name: install gitlab-ce
   apt:
