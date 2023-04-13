@@ -1,6 +1,6 @@
 ---
 type_of_install: package
-external_url: "https://super-gitlab.com"
+external_url: "super-gitlab.com"
 
 private_cert:
   use_private_cert: no

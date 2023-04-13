@@ -25,21 +25,21 @@
     path: /etc/gitlab/ssl
     state: directory
     recurse: yes
-  when: private_cert.use_private_cert == "yes"
+  when: private_cert.use_private_cert == true
 
 - name: place certificate in /etc/gitlab/ssl (1/2)
   copy:
     src: "{{ private_cert.key_path }}"
     dest: "/etc/gitlab/ssl/{{ external_url }}.key"
     mode: '0755'
-  when: private_cert.use_private_cert == "yes"
+  when: private_cert.use_private_cert == true
 
 - name: place certificate in /etc/gitlab/ssl (2/2)
   copy:
     src: "{{ private_cert.crt_path }}"
     dest: "/etc/gitlab/ssl/{{ external_url }}.crt"
     mode: '0755'
-  when: private_cert.use_private_cert == "yes"
+  when: private_cert.use_private_cert == true
 
 - name: send gitlab config 
   copy:
@@ -55,4 +55,4 @@
     state: present
     update_cache: yes
   environment:
-    EXTERNAL_URL: "{{ external_url }}"
+    EXTERNAL_URL: "https://{{ external_url }}"
