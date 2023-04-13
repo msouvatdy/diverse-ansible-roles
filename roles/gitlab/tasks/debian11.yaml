@@ -20,6 +20,33 @@
     repo: deb-src [signed-by=/etc/apt/trusted.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
     state: present
 
+- name: create ssl directory in /etc/gitlab
+  file:
+    path: /etc/gitlab/ssl
+    state: directory
+    recurse: yes
+  when: private_cert.use_private_cert == "yes"
+
+- name: place certificate in /etc/gitlab/ssl (1/2)
+  copy:
+    src: "{{ private_cert.key_path }}"
+    dest: "/etc/gitlab/ssl/{{ external_url }}.key"
+    mode: '0755'
+  when: private_cert.use_private_cert == "yes"
+
+- name: place certificate in /etc/gitlab/ssl (2/2)
+  copy:
+    src: "{{ private_cert.crt_path }}"
+    dest: "/etc/gitlab/ssl/{{ external_url }}.crt"
+    mode: '0755'
+  when: private_cert.use_private_cert == "yes"
+
+- name: send gitlab config 
+  copy:
+    src: "{{ role_path }}/files/gitlab.rb"
+    dest: "/etc/gitlab/gitlab.rb"
+  when: private_cert.use_private_cert == "yes"
+  
 - name: install gitlab-ce
   apt:
     name: gitlab-ce

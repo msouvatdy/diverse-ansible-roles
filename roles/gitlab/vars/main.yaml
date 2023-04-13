@@ -2,6 +2,11 @@
 type_of_install: package
 external_url: "https://super-gitlab.com"
 
+private_cert:
+  use_private_cert: no
+  key_path: /your_path_to_key
+  crt_path: /your_path_to_crt 
+
 dependencies:
 - curl 
 - openssh-server 
