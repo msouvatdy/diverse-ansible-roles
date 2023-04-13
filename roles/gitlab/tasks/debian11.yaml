@@ -45,10 +45,15 @@
   copy:
     src: "{{ role_path }}/files/gitlab.rb"
     dest: "/etc/gitlab/gitlab.rb"
-  when: private_cert.use_private_cert == "yes"
+  when: private_cert.use_private_cert == true
   notify:
   - reconfigure gitlab
   
+- name: add external url in gitlab.rb
+  lineinfile:
+    path: "/etc/gitlab/gitlab.rb"
+    line: "external_url \"https://{{ external_url }}\""
+
 - name: install gitlab-ce
   apt:
     name: gitlab-ce
