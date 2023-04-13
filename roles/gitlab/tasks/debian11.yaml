@@ -41,11 +41,21 @@
     mode: '0755'
   when: private_cert.use_private_cert == true
 
+- name: check if gitlab.rb is already present
+  file:
+    path: /etc/gitlab/gitlab.rb
+    state: file
+  ignore_errors: true 
+  register: config_file
+  when: private_cert.use_private_cert == true
+
 - name: send gitlab config 
   copy:
     src: "{{ role_path }}/files/gitlab.rb"
     dest: "/etc/gitlab/gitlab.rb"
-  when: private_cert.use_private_cert == true
+  when: 
+  - private_cert.use_private_cert == true
+  - config_file.failed == true
   notify:
   - reconfigure gitlab
   
