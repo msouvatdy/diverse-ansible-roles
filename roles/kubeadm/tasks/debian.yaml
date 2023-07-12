@@ -1,8 +1,6 @@
 ---
-- name: update all package
+- name: update package
   apt:
-    name: "*"
-    state: latest
     update_cache: yes
 
 - name: Adding k8s.conf in /etc/modules-load.d
