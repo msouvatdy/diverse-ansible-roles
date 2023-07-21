@@ -3,9 +3,7 @@
   kubernetes.core.helm:
     kubeconfig: "{{ kubeconfig }}"
     name: rancher
-    replace: True
-    force: True
-    create_namespace: true
+    update_repo_cache: yes
     chart_ref: rancher-stable/rancher
     chart_version: "{{ rancher_version }}"
     release_namespace: cattle-system
