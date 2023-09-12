@@ -13,6 +13,7 @@ secure_registry: ""
 path_to_cert: ""
 
 hashicorp_vault:
+  validate_certs: false 
   url: ""
   path: ""
   auth_method: token
@@ -21,5 +22,7 @@ hashicorp_vault:
   password: ""
   token_path: ""
   token_file: ""
+  token: ""
+  token_validate: false
   jwt: ""
   ca_cert: ""
