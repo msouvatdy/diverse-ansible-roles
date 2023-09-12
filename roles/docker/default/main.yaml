@@ -8,3 +8,18 @@ dep_package:
   - gnupg
   - lsb-release
   - jq
+secure_registry: ""
+
+path_to_cert: ""
+
+hashicorp_vault:
+  url: ""
+  path: ""
+  auth_method: token
+  #available auth method none, cert, jwt, azure, aws_iam, approle, ldap, userpass
+  username: ""
+  password: ""
+  token_path: ""
+  token_file: ""
+  jwt: ""
+  ca_cert: ""

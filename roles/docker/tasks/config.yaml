@@ -1,0 +1,27 @@
+- name: Add insecure registries
+  blockinfile:
+    block: |
+      {{ {"insecure-registries": [insecure_registry]} | to_json }}
+    create: true
+    marker: ""
+    path: /etc/docker/daemon.json
+  notify:
+  - Redemarrage de Docker
+  when: insecure_registry | length != 0
+
+- name: Add secure registries
+  file:
+    path: "/etc/docker/certs.d/{{ secure_registry }}"
+    state: directory
+    recurse: true
+  when: secure_registry | length != 0
+
+- name: add ca-cert
+  copy:
+    src: "{{ path_to_cert }}"
+    dest: "/etc/docker/certs.d/{{ secure_registry }}/ca.crt"
+  notify:
+  - Redemarrage de Docker
+  when: 
+  - path_to_cert | length != 0
+  - secure_registry | length != 0

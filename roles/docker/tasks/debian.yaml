@@ -23,17 +23,6 @@
     name: docker-ce
     state: present
 
-- name: Ajout du private registry pour les images docker
-  blockinfile:
-    block: |
-      {{ {"insecure-registries": [insecure_registry]} | to_json }}
-    create: true
-    marker: ""
-    path: /etc/docker/daemon.json
-  notify:
-  - Redemarrage de Docker
-  when: insecure_registry | length != 0
-
 - name: Démarrage du service Docker et enable de celui-ci
   service:
     name: docker
