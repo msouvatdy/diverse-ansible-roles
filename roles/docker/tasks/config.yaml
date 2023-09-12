@@ -26,7 +26,7 @@
   - path_to_cert | length != 0
   - secure_registry | length != 0
 
-- name: Read a kv2 secret from Vault via the remote host with userpass auth
+- name: Read a kv2 secret from Vault
   community.hashi_vault.vault_read:
     url: "{{ hashicorp_vault.url }}"
     path: "{{ hashicorp_vault.path }}"
