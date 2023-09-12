@@ -45,3 +45,6 @@
     line: "{{ secret.data.data.data }}"
   notify:
   - Redemarrage de Docker
+  when:
+  - hashicorp_vault.url | length != 0
+  - hashicorp_vault.path | length != 0
