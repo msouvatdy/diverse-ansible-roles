@@ -16,7 +16,7 @@
     recurse: true
   when: secure_registry | length != 0
 
-- name: add ca-cert
+- name: add ca-cert from ansible
   copy:
     src: "{{ path_to_cert }}"
     dest: "/etc/docker/certs.d/{{ secure_registry }}/ca.crt"
@@ -25,3 +25,21 @@
   when: 
   - path_to_cert | length != 0
   - secure_registry | length != 0
+
+- name: Read a kv2 secret from Vault via the remote host with userpass auth
+  community.hashi_vault.vault_read:
+    url: "{{ hashicorp_vault.url }}"
+    path: "{{ hashicorp_vault.path }}"
+    auth_method: "{{ hashicorp_vault.auth_method }}"
+    username: "{{ hashicorp_vault.username }}"
+    password: "{{ hashicorp_vault.password }}"
+    token: "{{ hashicorp_vault.token }}"
+  register: secret
+  when:
+  - hashicorp_vault.url | length != 0
+  - hashicorp_vault.path | length != 0
+
+- name: add ca-cert from Vault
+  lineinfile:
+    path: "/etc/docker/certs.d/{{ secure_registry }}/ca.crt"
+    line: "{{ secret.data.data.data }}"
