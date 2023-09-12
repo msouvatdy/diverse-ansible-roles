@@ -43,3 +43,5 @@
   lineinfile:
     path: "/etc/docker/certs.d/{{ secure_registry }}/ca.crt"
     line: "{{ secret.data.data.data }}"
+  notify:
+  - Redemarrage de Docker
