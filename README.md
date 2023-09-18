@@ -67,7 +67,7 @@ ssh-copy-id vagrant@debian
 You can create a Python virtual environment by using those following commands:
 
 ```bash
-apt install -y libselinux-python3
+apt install -y python3 python3-pip python3-venv
 python3 -m venv /usr/local/my_env
 source /usr/local/my-env/bin/activate
 pip3 install --upgrade pip
