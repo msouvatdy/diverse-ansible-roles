@@ -28,7 +28,7 @@
   copy:
     src: "/tmp/{{ os_type }}-{{ architecture_type }}/helm"
     dest: /usr/local/bin/helm
-    mode: u+rx,g-rx,o-rwx
+    mode: 0755
   when: archive.changed
   tags:
   - upgrade_helm
