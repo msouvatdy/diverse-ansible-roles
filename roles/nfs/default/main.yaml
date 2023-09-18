@@ -1,2 +1,0 @@
-mount_path: /data/k8s
-exposed_network: "10.10.20.0/24"
