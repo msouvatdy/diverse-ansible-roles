@@ -61,3 +61,14 @@ ssh-keygen
 ssh-copy-id vagrant@debian
 #default password of the user vagrant is vagrant
 ```
+
+### Configure python environment
+
+You can create a Python virtual environment by using those following commands:
+
+```bash
+apt install -y libselinux-python3
+python3 -m venv /usr/local/my_env
+source /usr/local/my-env/bin/activate
+pip3 install --upgrade pip
+```
