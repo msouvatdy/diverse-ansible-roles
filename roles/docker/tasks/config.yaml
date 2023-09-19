@@ -38,6 +38,7 @@
   when:
   - hashicorp_vault.url | length != 0
   - hashicorp_vault.path | length != 0
+  - hashicorp_vault.use_vault == true
 
 - name: add ca-cert from Vault
   lineinfile:
@@ -48,3 +49,4 @@
   when:
   - hashicorp_vault.url | length != 0
   - hashicorp_vault.path | length != 0
+  - hashicorp_vault.use_vault == true
