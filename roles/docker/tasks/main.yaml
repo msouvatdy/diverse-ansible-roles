@@ -3,5 +3,11 @@
   import_tasks: debian.yaml
   when: ansible_distribution|lower == 'debian'
 
+- name: install Docker on RHEL
+  import_tasks: rhel.yaml
+  when: ansible_distribution|lower == 'redhat'
+
 - name: configure docker
   import_tasks: config.yaml
+  tags:
+  - configure_docker

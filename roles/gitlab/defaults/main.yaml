@@ -1,0 +1,24 @@
+---
+type_of_install: package
+external_url: "super-gitlab.com"
+
+private_cert:
+  use_private_cert: no
+  key_path: /your_path_to_key
+  crt_path: /your_path_to_crt 
+
+kubeconfig: /home/vagrant/.kube/config
+gitlab_chart_version: 6.10.2
+
+dependencies:
+- curl 
+- openssh-server 
+- ca-certificates 
+- perl
+- postfix
+- gnupg
+- debian-archive-keyring
+- apt-transport-https
+
+key: "https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey"
+deb_rep: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/config_file.list?os=debian&dist=11&source=script

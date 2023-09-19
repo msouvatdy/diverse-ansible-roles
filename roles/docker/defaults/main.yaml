@@ -1,0 +1,33 @@
+---
+#insecure_registry: "mysuper-registry.fr:8082"
+insecure_registry: ""
+dep_package:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - jq
+
+dep_package_rhel:
+  - dnf-plugins-core
+  - yum-utils
+  
+secure_registry: ""
+
+path_to_cert: ""
+
+hashicorp_vault:
+  validate_certs: false 
+  url: ""
+  path: ""
+  auth_method: token
+  #available auth method none, cert, jwt, azure, aws_iam, approle, ldap, userpass
+  username: ""
+  password: ""
+  token_path: ""
+  token_file: ""
+  token: ""
+  token_validate: false
+  jwt: ""
+  ca_cert: ""

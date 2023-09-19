@@ -1,0 +1,17 @@
+---
+hostname_ingress: superrancher.io
+kubeconfig: /home/vagrant/.kube/config
+cert_manager_version: v1.7.1
+rancher_version: v2.7.1
+privateCA: false
+ingress_tls: false
+default_password: Aqwzsxedc@01
+
+additionalTrustedCAs: false
+path_to_add_ca: /home/vagrant/my_other_secret.yaml
+
+repo_helm:
+  rancher-stable: 
+    url: https://releases.rancher.com/server-charts/stable
+  jetstack: 
+    url: https://charts.jetstack.io

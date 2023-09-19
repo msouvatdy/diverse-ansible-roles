@@ -1,0 +1,30 @@
+---
+- name: RHEL - Packages Update
+  dnf:
+    update_cache: yes
+
+- name: RHEL - "Dependancies installation {{ dep_package_rhel }}"
+  dnf:
+    name: "{{ dep_package_rhel }}"
+    state: present
+
+- name: RHEL - Add repository for Docker
+  ansible.builtin.yum_repository:
+    name: Docker-ce
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+    gpgcheck: false
+    enabled: true
+    gpgcakey: https://download.docker.com/linux/centos/gpg
+
+- name: RHEL - Docker Installation
+  yum:
+    name: docker-ce
+    state: present
+    update_cache: yes
+
+- name: RHEL - Docker service start and enabling at startup
+  service:
+    name: docker
+    state: started
+    enabled: yes
