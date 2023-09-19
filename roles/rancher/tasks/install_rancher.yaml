@@ -50,6 +50,7 @@
     state: present
     src: "{{ role_path }}/files/cert-manager.crds.yaml"
     kubeconfig: "{{ kubeconfig }}"
+  when: privateCA == false
 
 - name: Deploy cert-manager chart inside cert-manager namespace
   kubernetes.core.helm:
@@ -59,6 +60,7 @@
     create_namespace: true
     chart_version: "{{ cert_manager_version }}"
     kubeconfig: "{{ kubeconfig }}"
+  when: privateCA == false
 
 - name: Deploy Rancher chart inside cattle-system namespace
   kubernetes.core.helm:
