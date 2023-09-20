@@ -2,18 +2,19 @@
 
 Ce roles a pour but d'installer le binaire Helm sur des machines de type linux.
 
+## Variables
 
-# Variables
 Les variables utilisées dans ce projet sont:
 |                |Valeur par défaut                          |Valeurs supportées                         |
 |----------------|-------------------------------|-----------------------------|
-|helm_version|	`v3.11.1` |version de helm disponible sur https://github.com/helm/helm/tree/main            |
+|helm_version| `v3.11.1` |version de helm disponible sur <https://github.com/helm/helm/tree/main>            |
 |os_type          |`linux`            |linux and darwin           |
 |architecture_type          |`amd64`|amd64, arm64, arm, 386, ppc64le, s390x|
 
-# Utilisation du roles
+## Utilisation du roles
 
 Créer un playbook appelant le roles et l'exécuter. Exemple:
+
 ```bash
 - hosts: my-server
   become: true

@@ -86,11 +86,11 @@ Documentation on how to install rancher with ssl: <https://ranchermanager.docs.r
 
 ```bash
 kubectl create ns cattle-system
-
+# the cert must be named tls.crt and tls.key
 kubectl -n cattle-system create secret tls tls-rancher-ingress \
   --cert=tls.crt \
   --key=tls.key
-
+#the cert must be named cacerts.pem
 kubectl -n cattle-system create secret generic tls-ca \
   --from-file=cacerts.pem=./cacerts.pem
 ```
