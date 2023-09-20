@@ -1,6 +1,6 @@
 ---
 #check https://github.com/helm/helm/releases for all version available
-helm_version: v3.11.1
+helm_version: v3.12.3
 #supported value: linux and darwin 
 os_type: linux
 #supported value: amd64, arm64, arm, 386, ppc64le, s390x
