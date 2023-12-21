@@ -2,7 +2,7 @@
 hostname_ingress: superrancher.io
 kubeconfig: /home/vagrant/.kube/config
 cert_manager_version: v1.7.1
-rancher_version: v2.7.1
+rancher_version: v2.7.5
 privateCA: false
 ingress_tls: false
 default_password: Aqwzsxedc@01
