@@ -1,0 +1,6 @@
+---
+repo_helm:
+  rancher-stable: 
+    url: https://releases.rancher.com/server-charts/stable
+  jetstack: 
+    url: https://charts.jetstack.io
