@@ -1,22 +1,4 @@
 ---
-- name: Delete SSL secret for Rancher
-  kubernetes.core.k8s:
-    state: absent
-    namespace: cattle-system
-    kubeconfig: "{{ kubeconfig }}"
-    name: tls-ca
-  when: privateCA == true
-  tags: ["never", "uninstall_rancher"]
-
-- name: Delete secret for additional CA
-  kubernetes.core.k8s:
-    state: absent
-    namespace: cattle-system
-    kubeconfig: "{{ kubeconfig }}"
-    name: tls-ca-additionnal
-  when: additionalTrustedCAs == true
-  tags: ["never", "uninstall_rancher"]
-
 - name: uninstall Rancher chart inside cattle-system namespace
   kubernetes.core.helm:
     kubeconfig: "{{ kubeconfig }}"
