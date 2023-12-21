@@ -1,5 +1,5 @@
 ---
-- name: Create SSL secret for Rancher
+- name: Delete SSL secret for Rancher
   kubernetes.core.k8s:
     state: absent
     namespace: cattle-system
@@ -8,7 +8,7 @@
   when: privateCA == true
   tags: ["never", "uninstall_rancher"]
 
-- name: Create secret for additional CA
+- name: Delete secret for additional CA
   kubernetes.core.k8s:
     state: absent
     namespace: cattle-system
@@ -17,7 +17,7 @@
   when: additionalTrustedCAs == true
   tags: ["never", "uninstall_rancher"]
 
-- name: Deploy Rancher chart inside cattle-system namespace
+- name: uninstall Rancher chart inside cattle-system namespace
   kubernetes.core.helm:
     kubeconfig: "{{ kubeconfig }}"
     name: rancher
@@ -39,7 +39,7 @@
     state: absent
   tags: ["never", "uninstall_rancher"]
 
-- name: Apply cert-manager.crds manifest to the cluster
+- name: Delete cert-manager.crds manifest to the cluster
   kubernetes.core.k8s:
     state: absent
     src: "{{ role_path }}/files/cert-manager.crds.yaml"
