@@ -26,36 +26,21 @@
     kind: Namespace
     state: present
     kubeconfig: "{{ kubeconfig }}"
-
-- name: Check if CA secret for Rancher is present
-  kubernetes.core.k8s:
-    state: present
-    namespace: cattle-system
-    kind: secret
-    kubeconfig: "{{ kubeconfig }}"
-    name: tls-ca
-  when: privateCA
-  register: tls_ca
-  ignore_errors: true
+  register: create_ns
 
 - name: Create tls-ca in namespace cattle-system from file {{ path_to_add_ca }}
   command: "kubectl -n cattle-system --kubeconfig {{ kubeconfig }} create secret generic tls-ca --from-file=cacerts.pem={{ path_to_add_ca }}"
-  when: tls_ca.failed == true
-
-- name: Check if TLS secret for Rancher ingress is present
-  kubernetes.core.k8s:
-    state: present
-    namespace: cattle-system
-    kind: secret
-    kubeconfig: "{{ kubeconfig }}"
-    name: tls-rancher-ingress
-  when: ingress_tls
-  register: ing_tls
+  when: 
+  - create_ns.changed
+  - privateCA
   ignore_errors: true
 
 - name: Create tls-rancher-ingress secret from files {{ path_to_tls_cert }} and {{ path_to_tls_key }}
   command: "kubectl -n cattle-system --kubeconfig {{ kubeconfig }} create secret tls tls-rancher-ingress --cert={{ path_to_tls_cert }} --key={{ path_to_tls_key }}"
-  when: ing_tls.failed == true
+  when: 
+  - create_ns.changed
+  - ingress_tls
+  ignore_errors: true
 
 - name: Create secret for additional CA
   kubernetes.core.k8s:
