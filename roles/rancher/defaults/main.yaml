@@ -3,9 +3,15 @@ hostname_ingress: superrancher.io
 kubeconfig: /home/vagrant/.kube/config
 cert_manager_version: v1.7.1
 rancher_version: v2.7.5
-privateCA: false
-ingress_tls: false
 default_password: Aqwzsxedc@01
+
+#Root certificate or chain of certificate root + intermediate for example
+privateCA: false
+path_to_ca: "/home/vagrant/cacerts.pem"
+#Certificate for the hostname ingress for https on rancher web interface
+ingress_tls: false
+path_to_tls_key: "/home/vagrant/tls.key"
+path_to_tls_cert: "/home/vagrant/tls.crt"
 
 additionalTrustedCAs: false
 path_to_add_ca: /home/vagrant/my_other_secret.yaml

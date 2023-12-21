@@ -26,6 +26,12 @@
     kubeconfig: "{{ kubeconfig }}"
     name: tls-ca
   when: privateCA == true
+  register: tls-ca
+  ignore_errors: true
+
+- name: Create tls-ca in namespace cattle-system from file {{ path_to_add_ca }}
+  command: "kubectl -n cattle-system --kubeconfig {{ kubeconfig }} create secret generic tls-ca --from-file=cacerts.pem={{ path_to_add_ca }}"
+  when: tls-ca.failed == true
 
 - name: Check if TLS secret for Rancher ingress is present
   kubernetes.core.k8s:
@@ -35,6 +41,12 @@
     kubeconfig: "{{ kubeconfig }}"
     name: tls-rancher-ingress
   when: ingress_tls == true
+  register: ing_tls
+  ignore_errors: true
+
+- name: Create tls-rancher-ingress secret from files {{ path_to_tls_cert }} and {{ path_to_tls_key }}
+  command: "kubectl -n cattle-system --kubeconfig {{ kubeconfig }} create secret tls tls-rancher-ingress --cert={{ path_to_tls_cert }} --key={{ path_to_tls_key }}"
+  when: ing_tls.failed == true
 
 - name: Create secret for additional CA
   kubernetes.core.k8s:
