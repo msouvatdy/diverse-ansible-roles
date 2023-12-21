@@ -29,7 +29,7 @@
   register: create_ns
 
 - name: Create tls-ca in namespace cattle-system from file {{ path_to_add_ca }}
-  command: "kubectl -n cattle-system --kubeconfig {{ kubeconfig }} create secret generic tls-ca --from-file=cacerts.pem={{ path_to_add_ca }}"
+  command: "kubectl -n cattle-system --kubeconfig {{ kubeconfig }} create secret generic tls-ca --from-file=cacerts.pem={{ path_to_ca }}"
   when: 
   - create_ns.changed
   - privateCA
