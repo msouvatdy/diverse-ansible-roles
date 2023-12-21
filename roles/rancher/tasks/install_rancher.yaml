@@ -40,7 +40,7 @@
     kind: secret
     kubeconfig: "{{ kubeconfig }}"
     name: tls-rancher-ingress
-  when: ingress_tls == true
+  when: ingress_tls.failed == true
   register: ing_tls
   ignore_errors: true
 
