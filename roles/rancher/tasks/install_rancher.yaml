@@ -34,7 +34,7 @@
     kind: secret
     kubeconfig: "{{ kubeconfig }}"
     name: tls-ca
-  when: privateCA == true
+  when: privateCA
   register: tls_ca
   ignore_errors: true
 
@@ -49,7 +49,7 @@
     kind: secret
     kubeconfig: "{{ kubeconfig }}"
     name: tls-rancher-ingress
-  when: ingress_tls.failed == true
+  when: ingress_tls
   register: ing_tls
   ignore_errors: true
 
