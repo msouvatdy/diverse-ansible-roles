@@ -3,7 +3,6 @@
   kubernetes.core.k8s:
     state: absent
     namespace: cattle-system
-    src: "{{ path_to_ca }}"
     kubeconfig: "{{ kubeconfig }}"
     name: tls-ca
   when: privateCA == true
@@ -13,7 +12,6 @@
   kubernetes.core.k8s:
     state: absent
     namespace: cattle-system
-    src: "{{ path_to_add_ca }}"
     kubeconfig: "{{ kubeconfig }}"
     name: tls-ca-additionnal
   when: additionalTrustedCAs == true
